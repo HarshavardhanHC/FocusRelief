@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blink Detection</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <header class="tm-site-header">
+                    <h1 class="pl-4 tm-site-title">ARE YOU BLINKING ENOUGH?</h1>
+                </header>
+            </div>
+        </div>
+    </div>
+
+    <div class="container tm-container-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <h2 class="tm-welcome-text" align="center">A lot can happen in the blink of an eye. The average adult blinks between 10-20 times per minute. Even though it only takes one-tenth of a second, all those blinks add up to about 10 percent of our waking life!</h2>
+                <br><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <div class="tm-video-container" align="center"> 
+                    <img src="{{ url_for('video_feed') }}" align="center"> 
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-6" align="center">
+                <label for="blinkReminderSwitch" class="tm-text-gray">Enable Blink Reminder</label>
+                <input type="checkbox" id="blinkReminderSwitch" {{ 'checked' if blink_reminder else '' }} onchange="toggleBlinkReminder()">
+            </div>
+            <div class="col-lg-6" align="center">
+                <label for="rule202020Switch" class="tm-text-gray">Enable 20-20-20 Rule Reminder</label>
+                <input type="checkbox" id="rule202020Switch" {{ 'checked' if rule_20_20_20 else '' }} onchange="toggle202020Rule()">
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <div class="row tm-section-mb tm-section-mt">
+            <div class="col-lg-4 col-md-4 col-sm-12 pr-lg-5 mb-md-0 mb-4" align="center">
+                <h3 class="mt-2 mb-3 tm-text-gray">BLINKING NOURISHES & LUBRICATES OUR EYES</h3>
+                <p>We don't often pay attention to our blinking habits throughout the day. But whether we realize it or not, blinking is vitally important to our eye health. Making a conscious effort to blink more often during high focus activities can do our eyes a world of good.</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 pr-lg-5 mb-md-0 mb-4" align="center">
+                <h3 class="mt-2 mb-3 tm-text-gray">WHEN WE FOCUS, WE BLINK A LOT LESS</h3>
+                <p>On an average we only blink 3-8 times per minute when reading, watching TV, listening to a podcast, working on a computer, or another activity that requires intense focus. That’s roughly 60 percent less than our normal rate of blinking!</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" align="center">
+                <h3 class="mt-2 mb-3 tm-text-gray">BLINKING CAN RELIEVE STRAIN & HELP DRY EYES</h3>
+                <p>Blinking is necessary to clean and moisturize our eyes. Each time we blink, a thin layer of tears is spread across the eye surface, keeping them from drying out as well as brushing away any small particles of dust or dirt that could otherwise irritate our eyes or impair our vision.</p>
+            </div>
+        </div>
+
+        <hr>
+
+
+    <script>
+        function toggleBlinkReminder() {
+            fetch('/toggle_blink_reminder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ blink_reminder: document.getElementById('blinkReminderSwitch').checked })
+            });
+        }
+
+        function toggle202020Rule() {
+            fetch('/toggle_20_20_20_rule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rule_20_20_20: document.getElementById('rule202020Switch').checked })
+            });
+        }
+    </script>
+</body>
+</html>
