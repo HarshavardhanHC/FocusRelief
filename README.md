@@ -29,7 +29,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Pyth
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/Anukriti2512/Eye-Strain-Detection.git
+$ git clone https://github.com/HarshavardhanHC/FocusRelief.git
 
 # Go into the repository
 $ cd Eye-Strain-Detection
